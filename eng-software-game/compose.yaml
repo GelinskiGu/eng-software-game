@@ -1,0 +1,10 @@
+services:
+  postgres-eng-software:
+    image: 'postgres:16-alpine'
+    container_name: 'postgres-eng-software'
+    environment:
+      - 'POSTGRES_DB=eng_software_db'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5431:5432'
