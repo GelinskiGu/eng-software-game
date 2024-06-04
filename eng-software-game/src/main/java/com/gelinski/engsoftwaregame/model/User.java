@@ -40,16 +40,16 @@ public class User implements Serializable, UserDetails {
     private String password;
 
     @Column(name = "account_non_expired")
-    private Boolean accountNonExpired;
+    private Boolean accountNonExpired = true;
 
     @Column(name = "account_non_locked")
-    private Boolean accountNonLocked;
+    private Boolean accountNonLocked = true;
 
     @Column(name = "credentials_non_expired")
-    private Boolean credentialsNonExpired;
+    private Boolean credentialsNonExpired = true;
 
     @Column(name = "enabled")
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_permission", joinColumns = {@JoinColumn(name = "id_user")}, inverseJoinColumns = {@JoinColumn(name = "id_permission")})

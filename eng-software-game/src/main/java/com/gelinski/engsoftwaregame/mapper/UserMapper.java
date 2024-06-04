@@ -1,6 +1,7 @@
 package com.gelinski.engsoftwaregame.mapper;
 
 import com.gelinski.engsoftwaregame.dto.UserDTO;
+import com.gelinski.engsoftwaregame.dto.security.SignUpDTO;
 import com.gelinski.engsoftwaregame.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,6 +18,8 @@ public interface UserMapper {
     @Mapping(target = "password", ignore = true)
     UserDTO entityToDTO(User user);
     User dtoToEntity(UserDTO userDTO);
+
+    User signUpDTOToEntity(SignUpDTO signUpDTO);
 
     List<UserDTO> mapToDTO(List<User> users);
     List<User> mapToEntity(List<UserDTO> userDTO);

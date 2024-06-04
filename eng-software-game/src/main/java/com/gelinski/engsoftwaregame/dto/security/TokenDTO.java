@@ -1,5 +1,6 @@
 package com.gelinski.engsoftwaregame.dto.security;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class TokenDTO implements Serializable {
     private Long userId;
     private String fullName;
@@ -17,13 +19,4 @@ public class TokenDTO implements Serializable {
     private Date expiration;
     private String accessToken;
     private String refreshToken;
-
-    public TokenDTO(String username, Boolean authenticated, Date created, Date expiration, String accessToken, String refreshToken) {
-        this.username = username;
-        this.authenticated = authenticated;
-        this.created = created;
-        this.expiration = expiration;
-        this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
-    }
 }

@@ -43,14 +43,14 @@ public class JwtTokenProvider {
         algorithm = Algorithm.HMAC256(secretKey.getBytes());
     }
 
-    public TokenDTO createAccessToken(String username, List<String> roles) {
+    public TokenDTO createAccessToken(Long userId, String fullName, String username, List<String> roles) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
 
-        var accessToken = getAccessToken(username, roles, now, validity);
+        var accessToken = getAccessToken(userId, fullName, username, roles, now, validity);
         var refreshToken = getRefreshToken(username, roles, now);
 
-        return new TokenDTO(username, true, now, validity, accessToken, refreshToken);
+        return new TokenDTO(userId, fullName, username, true, now, validity, accessToken, refreshToken);
     }
 
     public TokenDTO refreshToken(String refreshToken) {
@@ -63,13 +63,17 @@ public class JwtTokenProvider {
 
         String username = decodedJWT.getSubject();
         List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+        Long userId = decodedJWT.getClaim("userId").asLong();
+        String fullName = decodedJWT.getClaim("fullName").asString();
 
-        return createAccessToken(username, roles);
+        return createAccessToken(userId, fullName, username, roles);
     }
 
-    private String getAccessToken(String username, List<String> roles, Date now, Date validity) {
+    private String getAccessToken(Long userId, String fullName, String username, List<String> roles, Date now, Date validity) {
         String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         return JWT.create()
+                .withClaim("fullName", fullName)
+                .withClaim("userId", userId)
                 .withClaim("roles", roles)
                 .withIssuedAt(now)
                 .withExpiresAt(validity)
