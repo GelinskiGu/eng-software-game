@@ -12,13 +12,12 @@ services:
       - eng-network
 
   eng-software-game:
-    image: eng-software-game
+    image: gelinskigu/eng-software-game:latest
     restart: always
-    build: .
     working_dir: /eng-software-game
     environment:
       TZ: America/Sao_Paulo
-      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres:5432/eng_software_db
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres-eng-software:5432/eng_software_db
       SPRING.DATASOURCE.USERNAME: postgres
       SPRING.DATASOURCE.PASSWORD: postgres
     ports:
