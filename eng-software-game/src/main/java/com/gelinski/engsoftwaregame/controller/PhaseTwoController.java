@@ -29,6 +29,6 @@ public class PhaseTwoController {
         } catch (Exception e) {
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return ResponseEntity.ok(result);
     }
 }
