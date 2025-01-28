@@ -30,6 +30,16 @@ public class ReportService {
         return reportDTOS;
     }
 
+    public List<ReportDTO> generateReportByGroup(Long idGroup) {
+        List<Student> students = studentRepository.findByGroup(idGroup);
+        if (students.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<ReportDTO> reportDTOS = new ArrayList<>();
+        students.forEach(student -> reportDTOS.add(generateReportByStudent(student.getIdStudent())));
+        return reportDTOS;
+    }
+
     public ReportDTO generateReportByStudent(Long studentId) {
         Student student = studentRepository.findById(studentId).orElseThrow();
         PhaseOneReportDTO phaseOneReportDTO = getPhaseOneReport(student);

@@ -27,4 +27,9 @@ public class ReportController {
     public ResponseEntity<List<ReportDTO>> getAllReport() {
         return ResponseEntity.ok(service.generateAllReport());
     }
+
+    @GetMapping("/group/{groupId}")
+    public ResponseEntity<List<ReportDTO>> getTeacherReport(@PathVariable Long groupId) {
+        return ResponseEntity.ok(service.generateReportByGroup(groupId));
+    }
 }
